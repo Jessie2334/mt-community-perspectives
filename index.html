@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Beyond Accuracy: Community Perspectives on Machine Translation</title>
+  <meta name="description" content="Project page for Beyond Accuracy: Community Perspectives on Machine Translation." />
+  <style>
+    :root{
+      --ink:#102033;
+      --muted:#5f6f82;
+      --paper:#fbfcff;
+      --panel:#ffffff;
+      --line:#dce5ef;
+      --brand:#075b80;
+      --brand-2:#0e78a6;
+      --dev:#0057b8;
+      --learner:#0b8a43;
+      --lsp:#ff8b2b;
+      --translator:#ff525a;
+      --blue-soft:#e8f3fb;
+      --green-soft:#e8f7ef;
+      --orange-soft:#fff2e6;
+      --red-soft:#fff0f1;
+      --shadow:0 18px 45px rgba(12, 32, 52, .11);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at top left, rgba(14,120,166,.14), transparent 28rem),
+        linear-gradient(180deg, #f6fbff 0%, #ffffff 48%, #f9fbfd 100%);
+      color:var(--ink);
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height:1.55;
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .nav{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter:saturate(180%) blur(14px);
+      background:rgba(255,255,255,.86);
+      border-bottom:1px solid rgba(220,229,239,.85);
+    }
+    .nav-inner{
+      max-width:1180px; margin:0 auto; padding:12px 22px;
+      display:flex; align-items:center; justify-content:space-between; gap:22px;
+    }
+    .brand-mini{font-weight:800; letter-spacing:-.02em; color:var(--brand)}
+    .nav-links{display:flex; gap:18px; flex-wrap:wrap; font-size:14px; color:var(--muted)}
+    .nav-links a{color:var(--muted)}
+    .wrap{max-width:1180px; margin:0 auto; padding:0 22px}
+    .hero{padding:74px 0 42px;}
+    .hero-grid{display:grid; grid-template-columns:1.16fr .84fr; gap:34px; align-items:center}
+    .kicker{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border:1px solid rgba(7,91,128,.18);
+      background:#fff; color:var(--brand); border-radius:999px;
+      font-size:14px; font-weight:700; box-shadow:0 8px 24px rgba(7,91,128,.08);
+    }
+    h1{font-size:clamp(38px, 5vw, 72px); line-height:1.02; letter-spacing:-.055em; margin:18px 0 18px}
+    h2{font-size:clamp(26px, 3vw, 42px); line-height:1.12; letter-spacing:-.035em; margin:0 0 14px}
+    h3{font-size:21px; line-height:1.2; letter-spacing:-.02em; margin:0 0 10px}
+    p{margin:0 0 14px}
+    .lead{font-size:20px; color:#31475e; max-width:760px}
+    .authors{color:var(--muted); margin-top:14px; font-size:15px}
+    .cta-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:26px}
+    .btn{
+      display:inline-flex; align-items:center; gap:9px;
+      padding:11px 16px; border-radius:999px; border:1px solid transparent;
+      font-weight:750; font-size:14px;
+      transition:.18s transform ease, .18s box-shadow ease;
+    }
+    .btn:hover{transform:translateY(-1px); text-decoration:none}
+    .btn.primary{background:var(--brand); color:#fff; box-shadow:0 12px 30px rgba(7,91,128,.22)}
+    .btn.secondary{background:#fff; color:var(--brand); border-color:rgba(7,91,128,.18)}
+    .hero-card{
+      border-radius:var(--radius); background:rgba(255,255,255,.82); border:1px solid var(--line); box-shadow:var(--shadow);
+      padding:24px; overflow:hidden; position:relative;
+    }
+    .hero-card:before{
+      content:""; position:absolute; inset:auto -45px -45px auto; width:180px; height:180px;
+      background:radial-gradient(circle, rgba(255,139,43,.2), transparent 70%);
+      border-radius:50%;
+    }
+    .question{font-size:24px; line-height:1.2; font-weight:850; letter-spacing:-.025em; margin-bottom:16px}
+    .mini-metric-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:20px}
+    .mini-metric{background:#f8fbfe; border:1px solid var(--line); border-radius:16px; padding:14px}
+    .mini-metric strong{display:block; font-size:26px; letter-spacing:-.035em}
+    .mini-metric span{font-size:13px; color:var(--muted)}
+    .section{padding:56px 0}
+    .section-head{display:flex; align-items:end; justify-content:space-between; gap:24px; margin-bottom:22px}
+    .section-head p{color:var(--muted); max-width:650px}
+    .grid-4{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+    .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+    .grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:18px}
+    .panel{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); box-shadow:0 10px 30px rgba(16,32,51,.06); padding:22px}
+    .stat-card{padding:22px; min-height:156px; position:relative; overflow:hidden}
+    .stat-card .num{font-size:38px; line-height:1; font-weight:900; letter-spacing:-.05em; margin-bottom:10px}
+    .stat-card .label{font-weight:760; margin-bottom:8px}
+    .stat-card .desc{color:var(--muted); font-size:14px}
+    .pill{display:inline-flex; align-items:center; gap:6px; border-radius:999px; padding:6px 10px; font-size:13px; font-weight:800; background:#f2f6fa; color:#33485e}
+    .community-card{display:flex; gap:14px; align-items:flex-start; min-height:144px}
+    .icon{font-size:30px; flex:0 0 38px; height:38px; display:grid; place-items:center; border-radius:12px; background:#f3f8fc}
+    .community-card.dev{border-color:rgba(0,87,184,.25); background:linear-gradient(180deg,#fff,#f7fbff)}
+    .community-card.learner{border-color:rgba(11,138,67,.25); background:linear-gradient(180deg,#fff,#f8fff9)}
+    .community-card.lsp{border-color:rgba(255,139,43,.28); background:linear-gradient(180deg,#fff,#fffaf5)}
+    .community-card.translator{border-color:rgba(255,82,90,.28); background:linear-gradient(180deg,#fff,#fff7f8)}
+    .subtle{color:var(--muted); font-size:14px}
+    .topic-tabs{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px}
+    .topic-tab{border:1px solid var(--line); background:#fff; color:#364a61; border-radius:999px; padding:8px 12px; cursor:pointer; font-weight:760}
+    .topic-tab.active{background:var(--brand); color:#fff; border-color:var(--brand)}
+    .framing-box{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:12px}
+    .frame-col{border-radius:18px; padding:18px; border:1px solid var(--line); background:#fbfdff}
+    .frame-col.dev-frame{border-color:rgba(0,87,184,.28); background:var(--blue-soft)}
+    .frame-col.user-frame{border-color:rgba(255,82,90,.22); background:var(--red-soft)}
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .chip{padding:6px 9px; border-radius:999px; background:#fff; border:1px solid rgba(16,32,51,.1); font-size:13px; font-weight:700}
+    .bar-chart{display:flex; flex-direction:column; gap:12px; margin-top:12px}
+    .bar-row{display:grid; grid-template-columns:132px 1fr 54px; gap:10px; align-items:center; font-size:14px}
+    .bar-track{height:24px; background:#eef3f8; border-radius:999px; position:relative; overflow:hidden}
+    .zero{position:absolute; top:0; bottom:0; left:60%; width:1px; background:#93a6b8}
+    .bar{height:100%; position:absolute; top:0; border-radius:999px; opacity:.95}
+    .bar.pos{left:60%}
+    .bar.neg{right:40%}
+    .formula{font-size:34px; font-weight:900; letter-spacing:-.035em; text-align:center; padding:18px; background:#f6fbff; border:1px solid var(--line); border-radius:18px; margin:12px 0}
+    .formula small{font-size:18px; color:var(--muted); font-weight:700}
+    .defs{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; font-size:14px}
+    .def{background:#fff; border:1px solid var(--line); border-radius:14px; padding:10px}
+    table{width:100%; border-collapse:collapse; font-size:14px}
+    th,td{padding:10px 9px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top}
+    th{font-size:13px; text-transform:uppercase; letter-spacing:.04em; color:#52677d; background:#f6f9fc}
+    td.num{text-align:right; font-variant-numeric:tabular-nums}
+    .tag{display:inline-block; font-weight:800; padding:3px 8px; border-radius:999px; background:#eef5fa; font-size:12px}
+    .good{color:#0b8a43}.bad{color:#cf2e3a}
+    .insight-list{display:grid; gap:10px}
+    .insight{display:flex; gap:12px; align-items:flex-start; padding:12px; border:1px solid var(--line); background:#fff; border-radius:16px}
+    .insight b{display:block}
+    .insight .mark{font-size:18px; flex:0 0 28px; width:28px; height:28px; display:grid; place-items:center; border-radius:50%; background:#eaf5fb; color:var(--brand); font-weight:900}
+    .method-flow{display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-top:8px}
+    .step{background:#fff; border:1px solid var(--line); border-radius:16px; padding:13px; min-height:120px}
+    .step .no{font-size:12px; color:var(--brand); font-weight:900; text-transform:uppercase; letter-spacing:.06em}
+    .footer{padding:42px 0 58px; background:#0b2b40; color:#d9e7ef; margin-top:36px}
+    .footer a{color:#fff}
+    .foot-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:28px}
+    .cite-box{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12); border-radius:18px; padding:16px; font-size:13px; overflow:auto}
+    .notice{border-left:4px solid var(--brand); padding:12px 14px; background:#f5fbff; border-radius:14px; color:#3b536a}
+    @media (max-width: 920px){
+      .hero-grid,.grid-2,.grid-3,.grid-4,.foot-grid{grid-template-columns:1fr}
+      .framing-box{grid-template-columns:1fr}
+      .method-flow{grid-template-columns:1fr 1fr}
+      .nav-links{display:none}
+      h1{font-size:40px}
+    }
+    @media (max-width:560px){.method-flow{grid-template-columns:1fr}.bar-row{grid-template-columns:100px 1fr 42px}.defs{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand-mini" href="#top">Beyond Accuracy</a>
+      <div class="nav-links">
+        <a href="#corpus">Corpus</a><a href="#framing">Framing</a><a href="#conflict">Conflict</a><a href="#sentiment">Sentiment</a><a href="#resources">Resources</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="kicker">Machine Translation · Communities · Social Media</span>
+          <h1>Beyond Accuracy: Community Perspectives on Machine Translation</h1>
+          <p class="lead">A cross-community study of how AI developers, language learners, language service providers, and professional translators discuss machine translation in the real world.</p>
+          <p class="authors"><strong>Yujun Wang</strong>, Ehud Reiter, Shimei Pan, Steffen Eger, Wei Zhao<br/>University of Aberdeen · University of Maryland Baltimore County · University of Technology Nuremberg</p>
+          <div class="cta-row">
+            <a class="btn primary" href="assets/paper.pdf">Read paper PDF</a>
+            <a class="btn secondary" href="#findings">Explore findings</a>
+            <a class="btn secondary" href="#resources">Citation</a>
+          </div>
+        </div>
+        <aside class="hero-card">
+          <div class="question">How do communities define a “good” MT system?</div>
+          <p class="subtle">Technical progress does not guarantee stakeholder alignment. Different communities attach different meanings, values, and risks to the same MT topics.</p>
+          <div class="mini-metric-grid">
+            <div class="mini-metric"><strong>79,286</strong><span>MT-related posts/comments analysed</span></div>
+            <div class="mini-metric"><strong>4</strong><span>stakeholder communities</span></div>
+            <div class="mini-metric"><strong>2019–2025</strong><span>time span</span></div>
+            <div class="mini-metric"><strong>15</strong><span>topic/aspect categories</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="corpus" class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="pill">Corpus</span>
+            <h2>Large-scale social-media evidence</h2>
+          </div>
+          <p>The study collects public MT-related posts and comments from Reddit, Facebook, Bluesky, and Mastodon, then classifies each item by community, sentiment, topic, MT system, and other semantic dimensions.</p>
+        </div>
+        <div class="grid-4">
+          <div class="panel stat-card"><div class="num">105,310</div><div class="label">total records</div><div class="desc">Before filtering into the four main communities.</div></div>
+          <div class="panel stat-card"><div class="num">79,286</div><div class="label">analysis set</div><div class="desc">Posts/comments assigned to the four stakeholder communities.</div></div>
+          <div class="panel stat-card"><div class="num">4</div><div class="label">platforms</div><div class="desc">Facebook, Reddit, Bluesky, and Mastodon.</div></div>
+          <div class="panel stat-card"><div class="num">4</div><div class="label">communities</div><div class="desc">Developers, learners, LSPs, and translators.</div></div>
+        </div>
+        <div class="grid-2" style="margin-top:18px">
+          <div class="panel">
+            <h3>Community coverage</h3>
+            <table aria-label="Community counts">
+              <thead><tr><th>Community</th><th class="num">Posts/comments</th></tr></thead>
+              <tbody id="communityCounts"></tbody>
+            </table>
+          </div>
+          <div class="panel">
+            <h3>Platform coverage</h3>
+            <table aria-label="Platform counts">
+              <thead><tr><th>Platform</th><th class="num">Records</th></tr></thead>
+              <tbody id="platformCounts"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="framing" class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="pill">Finding 1</span>
+            <h2>Same MT topics, different meanings</h2>
+          </div>
+          <p>Communities discuss overlapping topics such as translation quality, efficiency, and reliability, but frame them through different priorities.</p>
+        </div>
+        <div class="grid-4">
+          <div class="panel community-card dev"><div class="icon">👨‍💻</div><div><h3>AI developers</h3><p class="subtle">Performance, model behavior, compute cost, robustness, hallucination.</p></div></div>
+          <div class="panel community-card learner"><div class="icon">🧑‍🎓</div><div><h3>Language learners</h3><p class="subtle">Usability, dialect/language coverage, explanations, learning support.</p></div></div>
+          <div class="panel community-card lsp"><div class="icon">🏢</div><div><h3>LSPs</h3><p class="subtle">Client-facing workflow, privacy, business value, adoption.</p></div></div>
+          <div class="panel community-card translator"><div class="icon">🌐</div><div><h3>Professional translators</h3><p class="subtle">Quality nuance, post-editing burden, rates, control, oversight.</p></div></div>
+        </div>
+        <div class="panel" style="margin-top:18px">
+          <div class="topic-tabs" role="tablist">
+            <button class="topic-tab active" data-topic="quality">Translation quality</button>
+            <button class="topic-tab" data-topic="efficiency">Efficiency</button>
+            <button class="topic-tab" data-topic="trust">Reliability & trust</button>
+          </div>
+          <div id="framingContent"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="findings" class="section">
+      <div class="wrap grid-2">
+        <div id="conflict" class="panel">
+          <span class="pill">Finding 2</span>
+          <h2>Conflict grows within communities</h2>
+          <p class="subtle">The paper operationalises within-community conflict as sentiment dispersion multiplied by the coexistence of positive and negative views.</p>
+          <div class="formula">C = σ<sub>s</sub> × 4p<sub>+</sub>p<sub>−</sub><br/><small>dispersion × polarity mixing</small></div>
+          <div class="defs">
+            <div class="def"><strong>σ<sub>s</sub></strong><br/><span class="subtle">standard deviation of sentiment scores</span></div>
+            <div class="def"><strong>p<sub>+</sub></strong><br/><span class="subtle">share of positive posts</span></div>
+            <div class="def"><strong>p<sub>−</sub></strong><br/><span class="subtle">share of negative posts</span></div>
+          </div>
+          <div class="notice" style="margin-top:16px"><strong>Interpretation:</strong> high conflict means a topic contains both strong sentiment spread and mixed positive/negative views inside the same community.</div>
+        </div>
+        <div class="panel">
+          <span class="pill">Finding 3</span>
+          <h2>Sentiment is not simply AI vs. users</h2>
+          <div class="insight-list">
+            <div class="insight"><span class="mark">1</span><div><b>LSPs are most positive overall.</b><span class="subtle">MT is often framed as useful infrastructure for language-service workflows.</span></div></div>
+            <div class="insight"><span class="mark">2</span><div><b>Professional translators are most critical.</b><span class="subtle">Concerns cluster around quality, cost, trust, and labour impact.</span></div></div>
+            <div class="insight"><span class="mark">3</span><div><b>Non-developer communities are heterogeneous.</b><span class="subtle">Learners, LSPs, and translators do not form one unified user perspective.</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sentiment" class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="pill">Dashboard</span>
+            <h2>Community sentiment and system-family differences</h2>
+          </div>
+          <p>Mean sentiment encodes negative = −1, neutral = 0, and positive = +1. The table reports sentiment balance as positive share minus negative share.</p>
+        </div>
+        <div class="grid-2">
+          <div class="panel">
+            <h3>Overall mean sentiment toward MT</h3>
+            <div class="bar-chart" id="sentimentBars"></div>
+          </div>
+          <div class="panel">
+            <h3>NMT vs. LLM-based systems</h3>
+            <table aria-label="NMT and LLM sentiment difference">
+              <thead><tr><th>Community</th><th class="num">NMT Diff.</th><th class="num">LLM Diff.</th><th>Higher balance</th></tr></thead>
+              <tbody id="systemDiff"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="pill">Method</span>
+            <h2>From public posts to community-level findings</h2>
+          </div>
+          <p>A transparent pipeline for collecting, filtering, annotating, validating, and analysing MT discourse.</p>
+        </div>
+        <div class="method-flow">
+          <div class="step"><div class="no">Step 1</div><h3>Collect</h3><p class="subtle">Public MT-related posts/comments from four free-access platforms.</p></div>
+          <div class="step"><div class="no">Step 2</div><h3>Filter</h3><p class="subtle">Remove spam, advertisements, and off-topic material.</p></div>
+          <div class="step"><div class="no">Step 3</div><h3>Annotate</h3><p class="subtle">Community, sentiment, subject, aspect, verb–object claim.</p></div>
+          <div class="step"><div class="no">Step 4</div><h3>Validate</h3><p class="subtle">Human evaluation for key automatic annotations.</p></div>
+          <div class="step"><div class="no">Step 5</div><h3>Analyse</h3><p class="subtle">Within-community conflict, cross-community sentiment, framing gaps.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap grid-3">
+        <div class="panel"><h3>For MT evaluation</h3><p>Go beyond benchmark accuracy. Include trust, workflow burden, labour impact, and practical oversight.</p></div>
+        <div class="panel"><h3>For system design</h3><p>Different stakeholder groups need different interfaces, assurances, and control mechanisms.</p></div>
+        <div class="panel"><h3>For community research</h3><p>Cross-community analysis can reveal conflicts that single-community studies miss.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="resources" class="footer">
+    <div class="wrap foot-grid">
+      <div>
+        <h2>Resources</h2>
+        <p>This project page is designed for a conference or arXiv project website. Replace placeholder links with your arXiv, OpenReview, poster, GitHub, or dataset links when available.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="assets/paper.pdf">Paper PDF</a>
+          <a class="btn secondary" href="mailto:y.wang2.25@abdn.ac.uk">Contact</a>
+        </div>
+      </div>
+      <div>
+        <h3>Citation</h3>
+        <div class="cite-box">@misc{wang2026beyondaccuracy,<br/>  title={Beyond Accuracy: Community Perspectives on Machine Translation},<br/>  author={Wang, Yujun and Reiter, Ehud and Pan, Shimei and Eger, Steffen and Zhao, Wei},<br/>  year={2026}<br/>}</div>
+      </div>
+    </div>
+  </footer>
+
+<script>
+const fmt = new Intl.NumberFormat('en-US');
+const communityCounts = [
+  ['AI developers', 31456, 'dev'],
+  ['Language learners', 23877, 'learner'],
+  ['Language service providers', 17435, 'lsp'],
+  ['Professional translators', 6518, 'translator']
+];
+const platformCounts = [
+  ['Facebook', 78401], ['Reddit', 18106], ['Bluesky', 6929], ['Mastodon', 1874]
+];
+const sentiment = [
+  ['AI developers', 0.13, 'var(--dev)'],
+  ['Language learners', 0.08, 'var(--learner)'],
+  ['LSPs', 0.20, 'var(--lsp)'],
+  ['Translators', -0.25, 'var(--translator)']
+];
+const diffs = [
+  ['AI dev.', 21.12, 7.83],
+  ['Learners', 3.92, 29.74],
+  ['LSPs', 15.78, 14.14],
+  ['Translators', -20.77, -25.59]
+];
+const framing = {
+  quality: {
+    title:'Translation quality',
+    dev:['model performance','accuracy / adequacy','benchmark-oriented evaluation'],
+    user:['context and cultural nuance','terminology and register','human review / quality assurance'],
+    gap:'Measurable quality vs. accountable quality'
+  },
+  efficiency: {
+    title:'Efficiency',
+    dev:['compute cost','model speed','token/API/inference efficiency'],
+    user:['time-saving','post-editing burden','workflow integration'],
+    gap:'System efficiency vs. human workload'
+  },
+  trust: {
+    title:'Reliability & trust',
+    dev:['hallucination','robustness','outages and bugs'],
+    user:['user trust','verification','human oversight and accountability'],
+    gap:'Technical reliability vs. practical trust'
+  }
+};
+function fillCounts(id, rows){
+  const el = document.getElementById(id);
+  el.innerHTML = rows.map(r => `<tr><td>${r[0]}</td><td class="num">${fmt.format(r[1])}</td></tr>`).join('');
+}
+function renderSentiment(){
+  const el = document.getElementById('sentimentBars');
+  const maxAbs = 0.30;
+  el.innerHTML = sentiment.map(([name,val,color]) => {
+    const width = Math.abs(val)/maxAbs*40;
+    const cls = val >= 0 ? 'pos' : 'neg';
+    return `<div class="bar-row"><div>${name}</div><div class="bar-track"><span class="zero"></span><span class="bar ${cls}" style="width:${width}%; background:${color}"></span></div><div class="num">${val.toFixed(2)}</div></div>`;
+  }).join('');
+}
+function renderDiffs(){
+  document.getElementById('systemDiff').innerHTML = diffs.map(([name,nmt,llm]) => {
+    const higher = nmt >= llm ? 'NMT' : 'LLM';
+    return `<tr><td>${name}</td><td class="num ${higher==='NMT'?'good':''}">${nmt.toFixed(2)}</td><td class="num ${higher==='LLM'?'good':''}">${llm.toFixed(2)}</td><td><span class="tag">${higher}</span></td></tr>`;
+  }).join('');
+}
+function renderFraming(key='quality'){
+  const x = framing[key];
+  document.getElementById('framingContent').innerHTML = `
+    <h3>${x.title}: ${x.gap}</h3>
+    <div class="framing-box">
+      <div class="frame-col dev-frame"><h3>AI developer framing</h3><div class="chips">${x.dev.map(v=>`<span class="chip">${v}</span>`).join('')}</div></div>
+      <div class="frame-col user-frame"><h3>User/practitioner framing</h3><div class="chips">${x.user.map(v=>`<span class="chip">${v}</span>`).join('')}</div></div>
+    </div>`;
+}
+document.querySelectorAll('.topic-tab').forEach(btn => btn.addEventListener('click', e => {
+  document.querySelectorAll('.topic-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderFraming(btn.dataset.topic);
+}));
+fillCounts('communityCounts', communityCounts);
+fillCounts('platformCounts', platformCounts);
+renderSentiment(); renderDiffs(); renderFraming();
+</script>
+</body>
+</html>
